@@ -3,8 +3,8 @@ import Image from 'next/image';
 
 const Navbar = () => {
   return (
-    <div className='py-5 sticky top-0 z-50 bg-white shadow-sm flex justify-between px-20'>
-        <div className="logo">
+    <div className='py-5 sticky top-0 z-50 bg-white shadow-sm flex flex-wrap justify-between px-5 sm:px-20'>
+        <div className="logo grid justify-items-center">
             <Image src='/images/logo2.png' height={'40px'} width={'150px'} alt='logo' />
         </div>
         <div className='flex flex-row gap-5 items-center'>

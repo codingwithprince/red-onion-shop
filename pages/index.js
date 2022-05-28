@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import About from '../components/About/About'
+import Foods from '../components/Foods/Foods'
 import Hero from '../components/Hero'
 import Navbar from '../components/Navbar'
 
@@ -18,8 +19,11 @@ export default function Home() {
         <Navbar />
         {/* ======== Hero ========= */}
         <Hero />
+        {/* ======== Foods ========= */}
+        <Foods />
         {/* ======== About ========= */}
         <About />
+        
       </main>
     </div>
   )
