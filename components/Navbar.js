@@ -3,9 +3,9 @@ import Image from 'next/image';
 
 const Navbar = () => {
   return (
-    <div className='py-5 flex justify-between px-20'>
+    <div className='py-5 sticky top-0 z-50 bg-white shadow-sm flex justify-between px-20'>
         <div className="logo">
-            <Image src='/images/logo2.png' height={40} width={150} alt='logo' />
+            <Image src='/images/logo2.png' height={'40px'} width={'150px'} alt='logo' />
         </div>
         <div className='flex flex-row gap-5 items-center'>
           <button>
