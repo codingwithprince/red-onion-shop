@@ -1,5 +1,5 @@
 import React from 'react'
-import { breakfast, lunch } from './allFoods';
+import { breakfast, lunch, dinner } from './allFoods';
 import SingleFoodItem from './SingleFoodItem';
 
 const Foods = () => {
@@ -91,7 +91,7 @@ const Foods = () => {
                 <div className={openTab === 3 ? "block" : "hidden"} id="link3">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
                       {
-                      breakfast.map(item => <SingleFoodItem key={item.price} item={item} />)
+                      dinner.map(item => <SingleFoodItem key={item.price} item={item} />)
                       }
                   </div> 
                 </div>
