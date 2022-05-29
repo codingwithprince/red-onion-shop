@@ -10,11 +10,7 @@ const Foods = () => {
     const color = 'gray';
 
   
-    const itemClickHandler = () =>{
-      if(openItem){
-        setOpenItem(false)
-      }
-    }
+    
   return (
     <>
          <div className="flex flex-wrap">
@@ -34,6 +30,7 @@ const Foods = () => {
                 onClick={e => {
                   e.preventDefault();
                   setOpenTab(1);
+                  setOpenItem(false)
                 }}
                 data-toggle="tab"
                 href="#link1"
@@ -53,6 +50,7 @@ const Foods = () => {
                 onClick={e => {
                   e.preventDefault();
                   setOpenTab(2);
+                  setOpenItem(false)
                 }}
                 data-toggle="tab"
                 href="#link2"
@@ -72,6 +70,7 @@ const Foods = () => {
                 onClick={e => {
                   e.preventDefault();
                   setOpenTab(3);
+                  setOpenItem(false)
                 }}
                 data-toggle="tab"
                 href="#link3"

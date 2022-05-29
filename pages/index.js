@@ -15,8 +15,6 @@ export default function Home() {
       </Head>
 
       <main >
-        {/* ======== Navbar ======== */}
-        <Navbar />
         {/* ======== Hero ========= */}
         <Hero />
         {/* ======== Foods ========= */}
