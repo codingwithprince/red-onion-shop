@@ -1,10 +1,20 @@
 import React from 'react'
 import { breakfast, lunch, dinner } from './allFoods';
+import SingleFoodDetails from './SingleFoodDetails';
 import SingleFoodItem from './SingleFoodItem';
 
 const Foods = () => {
-    const [openTab, setOpenTab] = React.useState(2);
+    const [openTab, setOpenTab] = React.useState(1);
+    const [openItem, setOpenItem] = React.useState(false)
+    const [singleItem, setSingleItem] = React.useState({})
     const color = 'gray';
+
+  
+    const itemClickHandler = () =>{
+      if(openItem){
+        setOpenItem(false)
+      }
+    }
   return (
     <>
          <div className="flex flex-wrap">
@@ -75,25 +85,44 @@ const Foods = () => {
             <div className="px-4 py-5 flex-auto">
               <div className="tab-content tab-space">
                 <div className={openTab === 1 ? "block" : "hidden"} id="link1">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
-                      {
-                      breakfast.map(item => <SingleFoodItem key={item.price} item={item} />)
-                      }
-                  </div> 
-                </div>
-                <div className={openTab === 2 ? "block" : "hidden"} id="link2">
+                {
+                  openItem ? <div> 
+                    <SingleFoodDetails item={singleItem} openItem={setOpenItem} />
+                  </div> :
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
                         {
-                        lunch.map(item => <SingleFoodItem key={item.price} item={item} />)
+                        breakfast.map(item => <SingleFoodItem setItem={setSingleItem} setOpen={setOpenItem} key={item.price} item={item} />)
                         }
-                    </div> 
+                   </div> 
+                }
+  
+                 
+                </div>
+                <div className={openTab === 2 ? "block" : "hidden"} id="link2">
+                {
+                  openItem ? <div> 
+                    <SingleFoodDetails item={singleItem} openItem={setOpenItem} />
+                  </div> :
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
+                        {
+                        lunch.map(item => <SingleFoodItem setItem={setSingleItem} setOpen={setOpenItem} key={item.price} item={item} />)
+                        }
+                   </div> 
+                }
+  
                 </div>
                 <div className={openTab === 3 ? "block" : "hidden"} id="link3">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
-                      {
-                      dinner.map(item => <SingleFoodItem key={item.price} item={item} />)
-                      }
-                  </div> 
+                {
+                  openItem ? <div> 
+                    <SingleFoodDetails item={singleItem} openItem={setOpenItem} />
+                  </div> :
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
+                        {
+                        dinner.map(item => <SingleFoodItem setItem={setSingleItem} setOpen={setOpenItem} key={item.price} item={item} />)
+                        }
+                   </div> 
+                }
+  
                 </div>
               </div>
             </div>
