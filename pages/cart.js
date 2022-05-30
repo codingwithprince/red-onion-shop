@@ -8,7 +8,7 @@ const cart = () => {
     <div className='px-[15%]'>
         <div className='flex flex-wrap justify-between items-center'>
           <h2 className='block text-4xl font-semibold text-[#444] py-10'>Your cart</h2>
-          <button className='mt-10 inline-block shadow-lg bg-[#f91944] hover:bg-red-500 text-white font-bold rounded-full py-3 px-7'>Checkout</button>
+          <button className='inline-block shadow-lg bg-[#f91944] hover:bg-red-500 text-white font-bold rounded-full py-2 px-5'>Checkout</button>
         </div>
         
 

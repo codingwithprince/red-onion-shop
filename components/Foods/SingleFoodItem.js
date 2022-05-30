@@ -30,7 +30,7 @@ const SingleFoodItem = ({item, setItem, setOpen, remove}) => {
           {
             remove && <button 
             onClick={()=> dispatch(removeFromCart(item.id))}
-            className='bg-red-500 py-1 rounded-full px-3 text-white font-bold'>-</button>
+            className='bg-red-500 float-right py-1 rounded-full px-3 text-white font-bold'>-</button>
           }
           
       </div>
