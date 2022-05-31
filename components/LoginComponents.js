@@ -4,8 +4,10 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../firebase/firebase.config';
 import { useDispatch, useSelector } from 'react-redux';
+import CheckOut from './CheckOut/CheckOut';
 
 const LoginComponents = () => {
+
     const userSate = useSelector(state => state.userReducer.loggedIn)
     const dispatch = useDispatch()
     const app = initializeApp(firebaseConfig);
@@ -33,9 +35,12 @@ const LoginComponents = () => {
   return (
     <div className='text-center mt-20'>
     
-        { !userSate &&  
+        { !userSate ?   
          <button onClick={()=> signInHandler()} className='bg-indigo-500 text-white p-2 rounded-full'>Login</button>
+         :
+         <CheckOut />
         }
+
          </div>
   )
 }
