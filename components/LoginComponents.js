@@ -16,7 +16,7 @@ const LoginComponents = () => {
     const auth = getAuth();
     const router = useRouter();
 
-// checking if user is from main page
+// push user to home if user came from direct login
     const routerCheck = () =>{
         if(myState.length == 0){
             router.push('/')
