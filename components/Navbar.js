@@ -1,10 +1,28 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { getAuth, signOut } from "firebase/auth";
+import { setSignOutUser } from '../redux/actions/userActions'
+
 
 const Navbar = () => {
   const myState = useSelector((state) => state.cartReducer.cart)
+  const router = useRouter()
+  const userState = useSelector(state => state.userReducer)
+  const {loggedIn, userInfo} = userState;
+  const dispatch = useDispatch()
+  
+  const signOutHandler = () =>{
+          const auth = getAuth();
+          signOut(auth).then(() => {
+            dispatch(setSignOutUser())
+          }).catch((error) => {
+            // An error happened.
+      });
+  }
+
   return (
     <div className='py-5 sticky top-0 z-50 bg-white shadow-sm flex flex-wrap justify-between px-5 sm:px-20'>
         <div className="logo grid justify-items-center">
@@ -20,12 +38,17 @@ const Navbar = () => {
             </svg>
             {
               myState.length > 0 && <span className='bg-red-500 rounded-full px-2 text-white'>{myState.length}</span>
-            }
-            
+            } 
             </div>
           </Link>
-          <button className='font-bold'>Login</button>
-          <button className='bg-[#f91944] hover:bg-red-500 text-white font-bold rounded-full py-2 px-7'>Sign up</button>
+          {
+            loggedIn ? <div className='flex gap-3'><p> {userInfo.displayName}</p><button onClick={()=> signOutHandler()} className='text-red-500 font-bold'>Logout</button></div> :
+          
+          <div className='flex gap-2 mx-5'>
+            <button className='font-bold' onClick={()=> router.push('/login')}>Login</button>
+            <button className='bg-[#f91944] hover:bg-red-500 text-white font-bold rounded-full py-2 px-7'>Sign up</button>
+          </div>
+}
         </div>
     </div>
   )
