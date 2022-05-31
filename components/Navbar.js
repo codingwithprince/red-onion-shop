@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link'
@@ -11,9 +12,10 @@ const Navbar = () => {
   const myState = useSelector((state) => state.cartReducer.cart)
   const router = useRouter()
   const userState = useSelector(state => state.userReducer)
-  const {loggedIn, userInfo} = userState;
+  const {loggedIn, userInfo } = userState;
   const dispatch = useDispatch()
-  
+
+
   const signOutHandler = () =>{
           const auth = getAuth();
           signOut(auth).then(() => {
@@ -42,7 +44,10 @@ const Navbar = () => {
             </div>
           </Link>
           {
-            loggedIn ? <div className='flex gap-3'><p> {userInfo.displayName}</p><button onClick={()=> signOutHandler()} className='text-red-500 font-bold'>Logout</button></div> :
+            loggedIn ? <div className='flex gap-3'>
+              <img src={userInfo.photoURL} className='rounded-full h-7 w-7' alt='' />
+              <button onClick={()=> signOutHandler()} className='text-red-500 font-bold'>Logout</button></div> 
+              :
           
           <div className='flex gap-2 mx-5'>
             <button className='font-bold' onClick={()=> router.push('/login')}>Login</button>
