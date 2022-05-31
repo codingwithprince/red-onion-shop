@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router';
 import { setUserLogin } from '../redux/actions/userActions'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { initializeApp } from "firebase/app";
@@ -7,17 +8,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import CheckOut from './CheckOut/CheckOut';
 
 const LoginComponents = () => {
-
+    const myState = useSelector(state => state.cartReducer.cart);
     const userSate = useSelector(state => state.userReducer.loggedIn)
     const dispatch = useDispatch()
     const app = initializeApp(firebaseConfig);
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
+    const router = useRouter();
+
+// checking if user is from main page
+    const routerCheck = () =>{
+        if(myState.length == 0){
+            router.push('/')
+        }
+    }
+
+
     const signInHandler = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
                 const user = result.user;
                 dispatch(setUserLogin(user))
+                routerCheck()
                 // ...
             }).catch((error) => {
                 // Handle Errors here.

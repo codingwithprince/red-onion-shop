@@ -17,6 +17,7 @@ const CartItems = () => {
   const userState = useSelector(state => state.userReducer)
     const checkoutHandler =()=>{
         router.push('/login')
+       
     }
 
   return (
