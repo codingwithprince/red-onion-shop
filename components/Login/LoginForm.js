@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserLogin } from '../../redux/actions/userActions'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { setUserLogin } from '../../redux/actions/userActions'
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../../firebase/firebase.config';
 import { useRouter } from 'next/router';
@@ -17,12 +17,8 @@ const LoginForm = () => {
     const router = useRouter();
 
 const [checked, setChecked] = useState(false)
-const [newUser, setNewUser] =useState({
-    name: '',
-    email: '',
-    pass: ''
-})
-console.log(newUser);
+
+
     const handleChange = () =>{
         if(checked){
             setChecked(false)
@@ -30,17 +26,15 @@ console.log(newUser);
             setChecked(true)
         }
     }
-
-    const handleBlur = (e) =>{
-        const value = e.target.value;
-        const name = e.target.name;
-        setNewUser({
-            ...newUser,
-            [name] : value
-        })
-        e.preventDefault()
-    }
    
+    // push user to home if user came from direct login
+    const routerCheck = () =>{
+        if(myState.length == 0){
+            router.push('/')
+        }
+    }
+
+
     const signInHandler = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
@@ -61,22 +55,29 @@ console.log(newUser);
 
   return (
     <div className='login-form'>
-        <from >
+
+        <form>
             {
              checked && 
             <div>
-                <input onBlur={handleBlur}  name='name' className='w-[350px] m-2 p-2 focus:outline-none border-2' type='text' placeholder='Name' />
+                <input  name='name' className='w-[350px] m-2 p-2 focus:outline-none border-2' type='text' placeholder='Name' />
                 <br />
             </div>
          }
-            <input  onBlur={handleBlur} name='email' className='w-[350px] m-2 p-2 focus:outline-none border-2' type='email' placeholder='Email' />
+            <input  name='email' className='w-[350px] m-2 p-2 focus:outline-none border-2' type='email' placeholder='Email' />
             <br />
-            <input onBlur={handleBlur} name='pass' className='w-[350px] m-2 p-2 focus:outline-none border-2' type='password' placeholder='Password' />
+            <input name='pass' className='w-[350px] m-2 p-2 focus:outline-none border-2' type='password' placeholder='Password' />
             <br />
             <input onClick={()=> handleChange()} type="checkbox" name="login" id="" value=''/> Sign up 
             <br />
-            <input  className='bg-[#f91944] hover:bg-red-500 text-white font-bold rounded-full py-2 px-7 mt-10' type="submit" value={checked ? 'Sign up' : 'Login'} />
-        </from>
+            {
+                checked ? 
+                <button className='bg-[#f91944] hover:bg-red-500 text-white font-bold rounded-full py-2 px-7 mt-10'>Sign Up</button>
+                :
+                <button className='bg-[#f91944] hover:bg-red-500 text-white font-bold rounded-full py-2 px-7 mt-10'>Login</button>
+            }
+            
+        </form>
         <div className="direct-login mt-20">
          <button onClick={()=> signInHandler()} className='bg-indigo-500 text-white p-2 rounded-full'>Google</button>
         </div>
